@@ -9,10 +9,8 @@ export function buildWhereClause(
 
   conditions.forEach(({ column, operator = "=", value, wildcard }) => {
     if (value !== undefined && value !== null) {
-      // Handle wildcard for LIKE/ILIKE queries
       const paramValue = wildcard ? `%${value}%` : value;
 
-      // Handle IN clause if value is an array
       if (Array.isArray(value)) {
         const placeholders = value
           .map((_, index) => `$${params.length + index + 1}`)

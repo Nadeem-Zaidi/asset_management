@@ -27,7 +27,7 @@ export class AssetRepositories implements IAssetRepository {
                                     '[]'
                                 )
                             ) AS assets
-                        FROM "asset" a
+                        FROM asset a
                         LEFT JOIN locations l ON a."locationId" = l.id
                         LEFT JOIN workorder wo ON wo."assetId" = a.id
                         ${whereClause}

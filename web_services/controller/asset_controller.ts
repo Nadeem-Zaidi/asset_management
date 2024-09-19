@@ -86,7 +86,7 @@ export class AssetController {
         },
       });
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      console.error("Error fetching assets:", error);
       next(error);
     }
   }

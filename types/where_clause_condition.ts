@@ -1,6 +1,6 @@
 export type WhereClauseCondition = {
   column: string;
-  operator?: string; // Default to '=' or can be 'ILIKE', etc.
+  operator?: string;
   value: any;
-  wildcard?: boolean; // To handle wildcard wrapping for LIKE queries
+  wildcard?: boolean;
 };
