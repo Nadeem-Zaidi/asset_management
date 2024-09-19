@@ -22,7 +22,7 @@ export class AssetController {
       sortKey = "name",
       sortOrder = "asc",
       id,
-      name,
+      assetnum,
       description,
     }: {
       page?: string;
@@ -30,7 +30,7 @@ export class AssetController {
       sortKey?: string;
       sortOrder?: string;
       id?: string;
-      name?: string;
+      assetnum?: string;
       description?: string;
     } = req.query;
 
@@ -44,10 +44,15 @@ export class AssetController {
     sortOrder = sortOrder === "asc" || sortOrder === "desc" ? sortOrder : "asc";
 
     const conditions: WhereClauseCondition[] = [
-      { column: "id", value: id },
-      { column: "name", operator: "ILIKE", value: name, wildcard: true },
+      { column: "a.id", value: id },
       {
-        column: "description",
+        column: "a.assetname",
+        operator: "ILIKE",
+        value: assetnum,
+        wildcard: true,
+      },
+      {
+        column: "a.description",
         operator: "ILIKE",
         value: description,
         wildcard: true,
