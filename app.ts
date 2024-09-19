@@ -1,6 +1,9 @@
 import express from "express";
 import dotenv from "dotenv";
 import { initializeDatabase } from "./infrastructure/database/database_connector";
+import asset_router from "./web_services/router/asset_router";
+import { AssetService } from "./application/services/asset_service";
+import { AssetController } from "./web_services/controller/asset_controller";
 
 dotenv.config();
 const app = express();
@@ -8,16 +11,15 @@ const cors = require("cors");
 
 app.use(cors());
 
-// Global middlewares loaded before startServer
-app.use(express.json()); // Body parser middleware for JSON
-app.use(express.urlencoded({ extended: true })); // Body parser for form submissions
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 async function startServer() {
   try {
-    // Initialize database
     const db = await initializeDatabase();
-
-    // Register routes after the database is initialized
+    const assetService = new AssetService();
+    const assetController = new AssetController(assetService);
+    app.use("/", asset_router(assetController));
 
     const PORT = process.env.PORT || 3000;
     app.listen(PORT, () => {

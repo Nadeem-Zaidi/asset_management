@@ -1,9 +1,9 @@
 import { Asset } from "../../domain/entities/asset";
-import { AssetRepository } from "../../domain/irepositories/iasset";
+import { IAssetRepository } from "../../domain/irepositories/iasset";
 import { Pagination } from "../../types/pagination";
 import { Database } from "../database/database";
 
-export class AssetRepositories implements AssetRepository {
+export class AssetRepositories implements IAssetRepository {
   db: Database;
   constructor(db: Database) {
     this.db = db;
