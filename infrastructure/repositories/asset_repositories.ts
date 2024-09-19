@@ -32,11 +32,13 @@ export class AssetRepositories implements IAssetRepository {
                         LEFT JOIN workorder wo ON wo."assetId" = a.id
                         ${whereClause}
                         GROUP BY a.id,l.location
-                        ORDER BY p.${sortKey} ${sortOrder}
+                        ORDER BY a.${sortKey} ${sortOrder}
                         LIMIT $${params.length + 1} 
                         OFFSET $${params.length + 2}
                         `;
     const fetchParams = [...params, pageSize, offset];
+    console.log(fetchQuery);
+    console.log(fetchParams);
     const results = await this.db.query(fetchQuery, fetchParams);
     const assets: Asset[] = results.rows.map((row: any) =>
       Asset.fromJson(row.assets)
