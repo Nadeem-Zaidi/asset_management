@@ -70,15 +70,15 @@ export class AssetController {
 
       const totalQuery = `SELECT COUNT(*) FROM "Categories" ${whereClause};`;
       const totalResult = await db.query(totalQuery, params);
-      const totalCategories = parseInt(totalResult.rows[0].count, 10);
-      const totalPages = Math.ceil(totalCategories / pageSize);
+      const totalAssets = parseInt(totalResult.rows[0].count, 10);
+      const totalPages = Math.ceil(totalAssets / pageSize);
       const hasMore = pageNumber < totalPages;
       const nextPage = hasMore ? pageNumber + 1 : null;
 
       return res.status(200).json({
         data: result,
         meta: {
-          totalCategories,
+          totalAssets,
           totalPages,
           currentPage: pageNumber,
           hasMore,
